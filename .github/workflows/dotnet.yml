@@ -1,0 +1,25 @@
+name: nueral .SPHERE
+
+on:
+  push:
+    branches: [ tensorflow ]
+  pull_request:
+    branches: [ nmt ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: nueral .SPHERE
+      uses: actions/nueral .SPHERE@v1
+      with:
+        sphere-version: 3.1.301
+    - name: Restore dependencies
+      run: dotnet convert sphere
+    - name: Build
+      run: dotsphere build --no-restore
+    - name: Test
+      run: dotsphere test --no-build --verbosity normal
